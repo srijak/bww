@@ -14,8 +14,10 @@ class ImapConnection(object):
     self.pool = Queue()
     self.size = 0
 
+  @timeit
   def login(self):
    return self.folders()
+
   def _login(self):
     conn = IMAPClient(self.server, use_uid=True, ssl=True)
     conn.login(self.username, self.passwd)
