@@ -34,3 +34,12 @@ class ImapConnection(object):
         self.size -= 1
         raise
       return c
+  @timeit
+  def select(self, folder_name):
+    # selects a folder with a dedicated connection.
+    # this is why every folder specific action requires
+    # a foldername
+    c = self.getConn()
+    ret = c.select_folder(folder_name)
+    self.putConn(c)
+    return ret
