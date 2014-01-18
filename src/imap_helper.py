@@ -34,6 +34,17 @@ class ImapConnection(object):
         self.size -= 1
         raise
       return c
+
+  def folders(self):
+    c = self.getConn()
+    result = c.list_folders()
+    self.putConn(c)
+
+    folders = {}
+    for r in result:
+      folders[r[2]] = [r[1], r[0]]
+    return folders
+
   @timeit
   def select(self, folder_name):
     # selects a folder with a dedicated connection.
