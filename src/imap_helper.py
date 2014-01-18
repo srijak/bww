@@ -35,6 +35,9 @@ class ImapConnection(object):
         raise
       return c
 
+  def putConn(self, c):
+    self.pool.put(c)
+
   def folders(self):
     c = self.getConn()
     result = c.list_folders()
