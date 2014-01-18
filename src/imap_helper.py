@@ -70,3 +70,9 @@ class ImapConnection(object):
     if put_back_conn:
       self.putConn(c)
     return ret
+
+
+
+if __name__ == "__main__":
+  con = ImapConnection()
+  con.logini()
