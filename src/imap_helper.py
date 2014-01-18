@@ -50,3 +50,23 @@ class ImapConnection(object):
     ret = c.folder_status(folder_name)
     self.putConn(c)
     return ret
+
+  @timeit
+  def messages(self, folder_name, c=None):
+    put_back_conn = True
+    if not c:
+      c = self.getConn()
+      put_back_conn = False
+    c.select_folder(folder_name)
+    ids = c.search()
+    ret = c.fetch(ids, ['BODY'])
+
+    for r in ret:
+      print "-" * 80
+      print r, ret[r]
+      print "*" * 80
+
+
+    if put_back_conn:
+      self.putConn(c)
+    return ret
