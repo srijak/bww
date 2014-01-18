@@ -43,3 +43,10 @@ class ImapConnection(object):
     ret = c.select_folder(folder_name)
     self.putConn(c)
     return ret
+
+  @timeit
+  def folder_status(self, folder_name):
+    c = self.getConn()
+    ret = c.folder_status(folder_name)
+    self.putConn(c)
+    return ret
